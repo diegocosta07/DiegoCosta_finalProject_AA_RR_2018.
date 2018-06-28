@@ -20,9 +20,12 @@ void satisfaz(int vet[], int u_pos){
 forca_bruta(vetor com as variáveis, posição atual do vetor, última posição do vetor);
 O algoritmo trabalha de maneira recursiva, primeiro verifica se pos_atual
 é o último endereço do vetor, se for, vet[pos_atual] recebe 0 e verifica
-se a fórmula é verdadeira, se for, mostra os valores das variáveis e para,
-senão, recebe 1 e verifica novamente.
-
+se a fórmula é verdadeira, se for, essa é uma solução válida e retorna 1
+para encerra a busca. Senão vet[pos_atual] recebe 1 e verifica novamente.
+Caso não seja a última possição, vet[pos_atual] recebe 0 e verifica todas
+as possiveis combinações das variáveis depois dela. Se não possui nenhuma,
+vet[pos_atual] recebe 1 e verifica para ele.
+Se possuir solução, a função retorna 1, senão 0;
 */
 int forca_bruta(int vet[], int pos_atual, int ult_pos){
 	int resp=0;
@@ -62,7 +65,7 @@ int forca_bruta(int vet[], int pos_atual, int ult_pos){
 int main(){
 	printf("Quantidade de variaveis: %d\n",Xn);
 	int resp;
-	int vet[Xn]; //Cada pos de vet é uma variavel: vet[0] = x0, vet[1] = x1....
+	int vet[Xn]; //Cada pos do vetor é uma variavel: vet[0] = x0, vet[1] = x1....
 
 	printf("(x1 or ~x2) and (x1 or x2 or x3) and (~x1 or x3)\n");
 	resp = forca_bruta(vet,0,Xn-1);
