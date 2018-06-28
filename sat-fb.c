@@ -7,7 +7,7 @@ int f(int vet[]){
 	return x;	
 }
 
-void satifaz(int vet[], int j){
+void satisfaz(int vet[], int j){
 	for(int i=0; i<j+1; i++){
 		printf("x%d = %d ", i+1,vet[i]);
 	}
@@ -18,13 +18,13 @@ void forca_bruta(int vet[], int i, int j){
 	if(i==j){
 		vet[i] = 0;
 		if(f(vet)==1){
-			satifaz(vet,j);
+			satisfaz(vet,j);
 			exit(0);
 		}
 
 		vet[i] = 1;
 		if(f(vet)==1){
-			satifaz(vet,j);
+			satisfaz(vet,j);
 			exit(0);
 		}
 	}
