@@ -1,50 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define Xn 3
 
-
-int f(int vet[]){
-	int x = (vet[0] || !vet[1]) && (vet[0] || vet[1] || vet[2]) && (!vet[0] || vet[2]);
-	return x;	
+int formula(int vet[]){
+	return (vet[0] || !vet[1]) && (vet[0] || vet[1] || vet[2]) && (!vet[0] || vet[2]);
+	//return (vet[0] && vet[1] && vet[2]) && (!vet[0] && !vet[1] && !vet[2]); //não tem solução
 }
 
-void satisfaz(int vet[], int j){
-	for(int i=0; i<j+1; i++){
+void satisfaz(int vet[], int u_pos){
+    int i;
+	for(i=0; i<u_pos; i++){
 		printf("x%d = %d ", i+1,vet[i]);
 	}
 	printf("\n");
 }
 
-void forca_bruta(int vet[], int i, int j){
-	if(i==j){
-		vet[i] = 0;
-		if(f(vet)==1){
-			satisfaz(vet,j);
-			exit(0);
+
+/*
+forca_bruta(vetor com as variáveis, posição atual do vetor, última posição do vetor);
+O algoritmo trabalha de maneira recursiva, primeiro verifica se pos_atual
+é o último endereço do vetor, se for, vet[pos_atual] recebe 0 e verifica
+se a fórmula é verdadeira, se for, mostra os valores das variáveis e para,
+senão, recebe 1 e verifica novamente.
+
+*/
+int forca_bruta(int vet[], int pos_atual, int ult_pos){
+	int resp=0;
+	/*	Caso base: só uma váriavel
+		atribui 0, verifica se é válida, retorna 1;
+		se não entrou no if, atribui 1, verifica se é válida, retorna 1;
+		se não entrou em nenhum, não tem solução, retorna 0;
+	*/
+	if(pos_atual==ult_pos){
+		vet[pos_atual] = 0;
+		if(formula(vet)==1){
+			return 1;
 		}
 
-		vet[i] = 1;
-		if(f(vet)==1){
-			satisfaz(vet,j);
-			exit(0);
+		vet[pos_atual] = 1;
+		if(formula(vet)==1){
+			return 1;
 		}
+		return 0;
 	}
+	//Tem mais de uma váriavel
 	else{
-		vet[i] = 0;
-		forca_bruta(vet,i+1,j);
-		vet[i] = 1;
-		forca_bruta(vet,i+1,j);
+		/*Atribui 0 a atual, é chama forca_bruta passando o endereço da
+		proxíma posição*/
+		vet[pos_atual] = 0;
+		resp = forca_bruta(vet,pos_atual+1,ult_pos);
+		/*Se não achou solução com essa variável valendo 0, entre nesse if
+		para verificar se existe com 1*/
+		if(resp==0){
+			vet[pos_atual] = 1;
+			resp = forca_bruta(vet,pos_atual+1,ult_pos);
+		}
+		return resp;
 	}
 }
 
 int main(){
-	int x;
-	printf("Quantidade de variaveis: ");
-	scanf("%d",&x);
-	int vet[x];
-	int i=0;
+	printf("Quantidade de variaveis: %d\n",Xn);
+	int resp;
+	int vet[Xn]; //Cada pos de vet é uma variavel: vet[0] = x0, vet[1] = x1....
+
 	printf("(x1 or ~x2) and (x1 or x2 or x3) and (~x1 or x3)\n");
+	resp = forca_bruta(vet,0,Xn-1);
+	if(resp == 1){
+		printf("Possui solucao\n");
+		satisfaz(vet,Xn);
+	}
+	else{
+		printf("Nao possui solucao\n");
+	}
 
-
-	forca_bruta(vet,i,x-1);
-
+	return 0;
 }
