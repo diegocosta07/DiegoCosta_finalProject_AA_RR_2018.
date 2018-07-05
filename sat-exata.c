@@ -27,9 +27,9 @@ void satisfaz(int vet[], int quant_x){
 
 
 /*
-forca_bruta(vetor com as variáveis, posição atual do vetor, última posição do vetor);
+forca_bruta(vetor com as variáveis, posição atual do vetor);
 O algoritmo trabalha de maneira recursiva, primeiro verifica se pos_atual
-é o último endereço do vetor, se for, vet[pos_atual] recebe 0 e verifica
+é o endereço 0 do vetor, se for, vet[pos_atual] recebe 0 e verifica
 se a fórmula é verdadeira, se for, mostra os valores das variáveis e para,
 senão, recebe 1 e verifica novamente.
 
