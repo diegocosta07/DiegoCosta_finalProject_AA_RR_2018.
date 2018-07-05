@@ -76,7 +76,6 @@ int main(){
 	int vet[Xn]; //Cada pos de vet é uma variavel: vet[0] = x0, vet[1] = x1....
 	double inicio, fim, tempo;
 
-	//printf("(x1 or ~x2) and (x1 or x2 or x3) and (~x1 or x3)\n");
 	inicio = clock();
 	resp = forca_bruta(vet,Xn-1);
 	fim = clock();
