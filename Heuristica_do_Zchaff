@@ -1,0 +1,4 @@
+As heurísticas utilizadas pelo Zchaff são:
+Variable State Indepedent Decaying Sum (VSIDS), essa heurística é uma das mais eficientes utilizada por SAT solvers modernos. Ela mantém as variáveis em uma ordenação por número de ocorrências dela no problema. Sempre que uma nova cláusula é aprendida, o valor de cada variável é incrementado e posteriormente todas são divididas por uma constante que estabelece o valor de decaimento a medida que o algoritmo progride. O valor atribuído a cada variável funciona como peso dessas variáveis em cada cláusula, e com elas o algoritmo decide qual irá resolver através da escolha da variável com maior número de ocorrências.
+BerkMin Type Decision Heuristic, essa heurística seleciona as cláusulas que mais tiverem conflito de satisfabilidade.
+
